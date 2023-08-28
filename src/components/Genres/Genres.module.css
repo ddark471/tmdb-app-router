@@ -1,0 +1,16 @@
+.genres{
+    width: 100%;
+    max-height: 20px;
+    height: 100%;
+    margin-top: 5px;
+}
+
+.genres__text{
+    
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    color: grey;
+    line-height: 18px;  
+    margin: 0;
+    padding: 0;
+}

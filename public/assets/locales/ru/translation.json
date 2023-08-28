@@ -1,0 +1,18 @@
+{
+        "logoName": "Фильмы",
+        "searchBarPlaceholder": "Найти фильм, сериал, актер...",
+        "searchBarButton": "Найти",
+        "title": "Название",
+        "description": "Описание",
+        "release_date": "Дата выхода",
+        "budget": "Бюджет",
+        "revenue": "Касса",
+        "duration": "Продолжительность",
+        "hours": "ч",
+        "minutes": "мин",
+        "showAll": "Все",
+        "birthday": "День рождения",
+        "placeOfBirth": "Место рождения",
+        "biography": "Биография",
+        "api-code": "ru-RU"
+}

@@ -1,0 +1,42 @@
+.NavBar{
+    max-width: 100%;
+    width: 100%;
+    min-width: 100%;
+    max-height: 100px;
+    height: 100%;
+    min-height: 100px;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #003153;
+    box-sizing: border-box;
+}
+
+.logo{
+    max-width: 200px;
+    width: 100%;
+    max-height: 150px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center; 
+    box-sizing: border-box;
+}
+
+.logoText{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    color: white;
+}
+
+.logo:hover{
+    cursor: pointer;
+}
+
+.logoText:hover{
+    cursor: pointer;
+}

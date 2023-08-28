@@ -1,0 +1,58 @@
+.rating{
+    max-width: 32px;
+    width: 100%;
+    max-height: 18px;
+    height: 18px;
+    position: absolute;
+    top: 5px;
+    left: -5px;
+    z-index: 10;
+    text-align: center;
+    border-radius: 2px;
+    line-height: 18px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.ratingPositive{
+    background-color: #3bb33b;
+    color: white;
+}
+
+.ratingNegative{
+    background-color: lightgrey;
+    color: white;
+}
+
+.ratingText{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 200;
+    text-align: center;
+}
+
+.ratingMovieDetails{
+    max-width: 50px;
+    width: 100%;
+    max-height: 25px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 20px;
+    left: -5px;
+    z-index: 5;
+    text-align: center;
+    border-radius: 2px;
+    line-height: 18px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.ratingMovieDetailsText{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 200;
+    text-align: center;
+}

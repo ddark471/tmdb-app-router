@@ -1,0 +1,83 @@
+.languageContainer{
+    max-width: 100px;
+    width: 100%;
+    max-height: 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.languageSwitcher{
+    max-width: 80px;
+    width: 100%;
+    max-height: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.switchModifier{
+    max-width: 60px;
+    width: 100%;
+    max-height: 50px;
+    height: 100%;
+    background-color: white;
+    padding: 3px;
+}
+
+.switchModifier .currentLang{
+    color: black;
+}
+
+.currentLang{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: white;
+    font-weight: 500;
+    line-height: 1.7px;
+}
+
+
+.langDropdown{
+    max-width: 60px;
+    width: 100%;
+    max-height: 50px;
+    height: 100%;
+    position: absolute;
+    top: 75px;
+    right: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    background-color: #DBF2FF;
+}
+
+.language{
+    width: 100%;
+    max-height: 50px;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.language:hover{
+    background-color: #82B2CA;
+    padding: 5px;
+}
+
+.languageText{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: black;
+}

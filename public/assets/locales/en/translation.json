@@ -1,0 +1,18 @@
+{
+        "logoName": "The Movies",
+        "searchBarPlaceholder": "Find movie, serie, actor...",
+        "searchBarButton": "Search",
+        "title": "Title",
+        "description": "Description",
+        "release_date": "Release date",
+        "budget": "Budget",
+        "revenue": "Revenue",
+        "duration": "Duration",
+        "hours": "hr",
+        "minutes": "mins",
+        "showAll": "All",
+        "birthday": "Birthday",
+        "placeOfBirth": "Place of Birth",
+        "biography": "Biography",
+        "api-code": "en-US"
+}
