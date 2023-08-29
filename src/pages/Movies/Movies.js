@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useSearchParams, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { PulseLoader } from "react-spinners";
 import { service } from "../../api/service";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -11,25 +13,27 @@ import Pagination from "../../components/Pagination/Pagination";
 import styles from "./Movies.module.css";
 
 const Movies = () => {
-  const [moviesData, setMoviesData] = useState([]);
-  const [totalResults, setTotalResults] = useState(0);
   const [searchParams, setSearchParams] = useSearchParams();
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    service(
-      `https://api.themoviedb.org/3/movie/popular?language=${t(
-        "api-code"
-      )}&page=${searchParams.get("page") ? searchParams.get("page") : 1}`,
-      "GET"
-    ).then(({ data }) => {
-      setMoviesData(data.results); //data.results equal to 20, then content per page will be 20;
-      setTotalResults(data.total_results);
-    });
     setSearchParams({
       page: searchParams.get("page") ? searchParams.get("page") : 1,
     });
   }, [i18n.language, searchParams]);
+
+  const { data, isError, isSuccess, isFetched } = useQuery({
+    queryKey: ["Movies", i18n.language, searchParams.get("page")],
+    queryFn: async () => {
+      const { data } = await service(
+        `https://api.themoviedb.org/3/movie/popular?language=${t(
+          "api-code"
+        )}&page=${searchParams.get("page") ? searchParams.get("page") : 1}`,
+        "GET"
+      );
+      return data;
+    },
+  });
 
   const handleBackPage = () =>
     setSearchParams({ page: parseInt(searchParams.get("page", 10)) - 1 });
@@ -37,21 +41,61 @@ const Movies = () => {
   const handleNextPage = () =>
     setSearchParams({ page: parseInt(searchParams.get("page", 10)) + 1 });
 
+  if (isError)
+    return (
+      <div
+        style={{
+          maxWidth: "100%",
+          width: "100%",
+          maxHeight: "500px",
+          height: "100%",
+          minHeight: "500px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h1>Something is wrong, please try again!!</h1>
+      </div>
+    );
+
   return (
     <>
-      <div className={styles.moviesContainer}>
-        {moviesData.map((movies) => (
-          <div className={styles.movies} key={movies.id}>
-            <PostersTemplate postersData={movies} type={"moviePosters"} />
+      {!isFetched && (
+        <div
+          style={{
+            maxWidth: "100%",
+            width: "100%",
+            maxHeight: "500px",
+            height: "100%",
+            minHeight: "500px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <PulseLoader color="#36d7b7" size={50} />
+        </div>
+      )}
+      {isSuccess && (
+        <>
+          <div className={styles.moviesContainer}>
+            {data.results.map((movies) => (
+              <div className={styles.movies} key={movies.id}>
+                <PostersTemplate postersData={movies} type={"moviePosters"} />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      {totalResults > moviesData.length ? (
-        <Pagination
-          handleBackPage={handleBackPage}
-          handleNextPage={handleNextPage}
-        />
-      ) : null}
+          {data.total_results > data.results.length ? (
+            <Pagination
+              handleBackPage={handleBackPage}
+              handleNextPage={handleNextPage}
+            />
+          ) : null}
+        </>
+      )}
     </>
   );
 };

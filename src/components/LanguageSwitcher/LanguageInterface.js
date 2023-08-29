@@ -26,12 +26,11 @@ const LanguageInterface = ({
           <div className={styles.langDropdown}>
             <div
               className={styles.language}
-              onClick={() => handleClick(i18n.language == "en" ? "ru" : "en")}
+              onClick={(event) =>
+                handleClick(event, i18n.language == "en" ? "ru" : "en")
+              }
             >
-              <span
-                className={styles.languageText}
-                onClick={() => handleClick(i18n.language == "en" ? "ru" : "en")}
-              >
+              <span className={styles.languageText}>
                 {i18n.language == "en" ? "RU" : "EN"}
               </span>
             </div>

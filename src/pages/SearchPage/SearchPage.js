@@ -17,22 +17,6 @@ const SearchPage = () => {
   const { t } = useTranslation();
   const query = searchParams.get("query");
 
-  // useEffect(() => {
-  //   service(
-  //     `https://api.themoviedb.org/3/search/movie?query=${query}&language=${t(
-  //       "api-code"
-  //     )}&page=${searchParams.get("page") ? searchParams.get("page") : 1}`,
-  //     "GET"
-  //   ).then(({ data }) => {
-  //     setSearchResults(data.results);
-  //     setTotalResults(data.total_results);
-  //   });
-  //   setSearchParams({
-  //     query: query,
-  //     page: searchParams.get("page") ? searchParams.get("page") : 1,
-  //   });
-  // }, [searchParams]);
-
   console.log(query);
   useEffect(() => {
     setSearchParams({
@@ -41,8 +25,8 @@ const SearchPage = () => {
     });
   }, [searchParams]);
 
-  const { data, isError, isSuccess, isFetching, error } = useQuery({
-    queryKey: ["SearchPage", searchParams, query],
+  const { data, isError, isSuccess, isFetched, error } = useQuery({
+    queryKey: ["SearchPage", searchParams.get("page"), query],
     queryFn: async () => {
       const { data } = await service(
         `https://api.themoviedb.org/3/search/movie?query=${query}&language=${t(
@@ -53,8 +37,6 @@ const SearchPage = () => {
       return data.results;
     },
   });
-
-  console.log(data);
 
   const handleBackPage = () =>
     setSearchParams({
@@ -75,9 +57,28 @@ const SearchPage = () => {
     });
   }, [query]);
 
+  if (isError)
+    return (
+      <div
+        style={{
+          maxWidth: "100%",
+          width: "100%",
+          maxHeight: "500px",
+          height: "100%",
+          minHeight: "500px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h1>Something is wrong, please try again</h1>
+      </div>
+    );
+
   return (
     <>
-      {isFetching && (
+      {!isFetched && (
         <div
           style={{
             maxWidth: "100%",
@@ -94,25 +95,44 @@ const SearchPage = () => {
           <PulseLoader color="#36d7b7" size={50} />
         </div>
       )}
-      {isSuccess && (
-        <div className={styles.moviesContainer}>
-          {" "}
-          {data.map((movies) => (
-            <PostersTemplate
-              postersData={movies}
-              type={"moviePosters"}
-              key={movies.id}
+
+      {isSuccess &&
+        (data.length !== 0 ? (
+          <>
+            <div className={styles.moviesContainer}>
+              {data.map((movies) => (
+                <PostersTemplate
+                  postersData={movies}
+                  type={"moviePosters"}
+                  key={movies.id}
+                />
+              ))}
+            </div>
+            <Pagination
+              handleBackPage={handleBackPage}
+              handleNextPage={handleNextPage}
+              searchResults={data}
             />
-          ))}
-        </div>
-      )}
-      {isSuccess && (
-        <Pagination
-          handleBackPage={handleBackPage}
-          handleNextPage={handleNextPage}
-          searchResults={data}
-        />
-      )}
+          </>
+        ) : (
+          <div
+            style={{
+              maxWidth: "100%",
+              width: "100%",
+              maxHeight: "500px",
+              height: "100%",
+              minHeight: "500px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <h1 style={{ fontSize: "50px", fontStyle: "bold" }}>
+              404 not found
+            </h1>
+          </div>
+        ))}
     </>
   );
 };

@@ -67,6 +67,7 @@
     align-items: center;
     justify-content: center;
     padding: 5px;
+    outline: none;
     box-sizing: border-box;
 }
 
@@ -80,4 +81,5 @@
     font-weight: 400;
     font-size: 15px;
     color: black;
+    outline: none;
 }

@@ -19,14 +19,7 @@ const Movie = () => {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
 
-  // useEffect(() => {
-  //   service(
-  //     `https://api.themoviedb.org/3/movie/${id}?language=${t("api-code")}`,
-  //     "GET"
-  //   ).then((details) => setMovieDetails(details.data));
-  // }, [id, i18n.language]);
-
-  const { data, isFetching, isLoading, isSuccess, error } = useQuery({
+  const { data, isSuccess, error, isFetched } = useQuery({
     queryKey: ["MovieDetails", id, i18n.language],
     queryFn: async () => {
       const { data } = await service(
@@ -37,20 +30,18 @@ const Movie = () => {
     },
   });
 
-  console.log("fetching", isFetching, "Loading", isLoading);
-
   const totalHours = isSuccess && convertToHours(data.runtime);
 
   return (
     <>
-      {isFetching && (
+      {!isFetched && (
         <div
           style={{
             maxWidth: "100%",
             width: "100%",
             maxHeight: "500px",
             height: "100%",
-            minHeight: "500px",
+            marginTop: "150px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

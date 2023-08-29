@@ -9,7 +9,8 @@ const LanguageSwitcher = () => {
   const handleOnMouseEnter = () => setIsActive(true);
   const handleOnMouseLeave = () => setIsActive(false);
 
-  const handleClick = (language) => {
+  const handleClick = (event, language) => {
+    event.preventDefault();
     if (language === "en") i18n.changeLanguage("en");
     else if (language === "ru") i18n.changeLanguage("ru");
   };
