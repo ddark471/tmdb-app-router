@@ -45,6 +45,10 @@ const MovieImages = ({ movie_id }) => {
         <div className={styles.movieImages}>
           {data.map((item) => {
             if (item.iso_639_1 === null) {
+              {
+                /*will take only movie images, excludes posters*/
+                /*iso_639_1 is a language name */
+              }
               return (
                 <div key={item.file_path}>
                   <ModalImage
