@@ -5,12 +5,7 @@ import ModalImage from "react-modal-image";
 import styles from "./MovieImages.module.css";
 
 const MovieImages = ({ movie_id }) => {
-  const [movieImages, setMovieImages] = useState([]);
   const url = `https://api.themoviedb.org/3/movie/${movie_id}/images`;
-
-  // useEffect(() => {
-  //   service(url, "GET").then((elem) => setMovieImages(elem.data.backdrops));
-  // }, [movie_id]);
 
   const { data, isSuccess, isError } = useQuery({
     queryKey: ["MovieImages", movie_id],
