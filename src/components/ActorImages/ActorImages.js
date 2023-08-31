@@ -5,11 +5,10 @@ import ModalImage from "react-modal-image";
 import styles from "./ActorImages.module.css";
 
 const ActorImages = ({ person_id }) => {
-  const [actorImages, setActorImages] = useState([]);
-  const { data, isError, isSuccess } = useQuery({
+  const { data, isError, isSuccess, error } = useQuery({
     queryKey: ["ActorImages", person_id],
     queryFn: async () => {
-      const { data } = service(
+      const { data } = await service(
         `https://api.themoviedb.org/3/person/${person_id}/images`,
         "GET"
       );
@@ -17,18 +16,11 @@ const ActorImages = ({ person_id }) => {
     },
   });
 
-  // useEffect(() => {
-  //   service(
-  //     `https://api.themoviedb.org/3/person/${person_id}/images`,
-  //     "GET"
-  //   ).then((item) => setActorImages(item.data.profiles));
-  // }, [person_id]);
-
   return (
     <>
       {isSuccess && (
         <div className={styles.actorImages} key={person_id}>
-          {actorImages.map((images) => (
+          {data.map((images) => (
             <div key={images.file_path}>
               <ModalImage
                 small={`https://image.tmdb.org/t/p/w185${images.file_path}`}

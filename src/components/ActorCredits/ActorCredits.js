@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import styles from "./ActorCredits.module.css";
 
 const ActorCredits = ({ person_id }) => {
-  const [actorCredits, setActorCredits] = useState([]);
   const { t, i18n } = useTranslation();
 
   const { data, isError, error, isSuccess } = useQuery({
@@ -18,14 +17,14 @@ const ActorCredits = ({ person_id }) => {
         )}`,
         "GET"
       );
-      return data;
+      return data.cast;
     },
   });
 
   return (
     <div className={styles.ActorCredits}>
       {isSuccess ? (
-        data.cast.map((movie) => (
+        data.map((movie) => (
           <div key={movie.id}>
             <PostersTemplate postersData={movie} />
           </div>
