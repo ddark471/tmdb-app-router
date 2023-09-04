@@ -1,0 +1,4 @@
+#ignore dependencies
+node_modules/
+
+.vscode/
