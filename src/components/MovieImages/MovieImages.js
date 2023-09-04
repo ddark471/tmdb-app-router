@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { base_url } from "../../api/url";
 import { service } from "../../api/service";
 import ModalImage from "react-modal-image";
 import styles from "./MovieImages.module.css";
 
 const MovieImages = ({ movie_id }) => {
-  const url = `https://api.themoviedb.org/3/movie/${movie_id}/images`;
+  const url = `${base_url}/movie/${movie_id}/images`;
 
   const { data, isSuccess, isError } = useQuery({
     queryKey: ["MovieImages", movie_id],
