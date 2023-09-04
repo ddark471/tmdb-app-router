@@ -1,9 +1,8 @@
 import React from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import styles from "./Pagination.module.css";
 
 const Pagination = ({ handleNextPage, handleBackPage, searchResults }) => {
-  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page", 10));
 
