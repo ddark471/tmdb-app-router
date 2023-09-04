@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { base_url } from "../../api/url";
 import { service } from "../../api/service";
 import ModalImage from "react-modal-image";
 import styles from "./ActorImages.module.css";
@@ -9,7 +10,7 @@ const ActorImages = ({ person_id }) => {
     queryKey: ["ActorImages", person_id],
     queryFn: async () => {
       const { data } = await service(
-        `https://api.themoviedb.org/3/person/${person_id}/images`,
+        `${base_url}/person/${person_id}/images`,
         "GET"
       );
       return data.profiles;
