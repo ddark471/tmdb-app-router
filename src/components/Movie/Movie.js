@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { PulseLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 import { isError, useQuery } from "@tanstack/react-query";
+import { base_url } from "../../api/url";
 import { service } from "../../api/service";
 import { sliceDescription } from "../../utils/sliceDescription";
 import { convertToDollars } from "../../utils/converToDollars";
@@ -22,7 +23,7 @@ const Movie = () => {
     queryKey: ["MovieDetails", id, i18n.language],
     queryFn: async () => {
       const { data } = await service(
-        `https://api.themoviedb.org/3/movie/${id}?language=${t("api-code")}`,
+        `${base_url}/movie/${id}?language=${t("api-code")}`,
         "GET"
       );
       return data;
