@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { base_url } from "../../api/url";
 import { service } from "../../api/service";
 import { useTranslation } from "react-i18next";
 import styles from "./Genres.module.css";
@@ -10,7 +11,7 @@ const Genres = ({ genre_ids }) => {
     queryKey: ["Genres", genre_ids, i18n.language],
     queryFn: async () => {
       const { data } = await service(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=ad2c8cdf383ced3998f35ea391725c12&language=${i18n.language}`,
+        `${base_url}/genre/movie/list?api_key=ad2c8cdf383ced3998f35ea391725c12&language=${i18n.language}`,
         "GET"
       );
       return data.genres;
