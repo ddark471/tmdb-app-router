@@ -18,7 +18,6 @@ import styles from "./Movie.module.css";
 const Movie = () => {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
-
   const { data, isSuccess, error, isFetched } = useQuery({
     queryKey: ["MovieDetails", id, i18n.language],
     queryFn: async () => {
