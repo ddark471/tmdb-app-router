@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { base_url } from "../../api/url";
 import { PulseLoader } from "react-spinners";
 import { service } from "../../api/service";
 import { useTranslation } from "react-i18next";
@@ -12,12 +13,11 @@ import styles from "./Actor.module.css";
 const Actor = () => {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
-
   const { data, isSuccess, isError, isFetched } = useQuery({
     queryKey: ["ActorDetails", id, i18n.language],
     queryFn: async () => {
       const { data } = await service(
-        `https://api.themoviedb.org/3/person/${id}?language=${t("api-code")}`,
+        `${base_url}/person/${id}?language=${t("api-code")}`,
         "GET"
       );
       return data;
