@@ -99,13 +99,11 @@ const Movie = () => {
                   )} ${totalHours.minutes}${t("minutes")}`}</span>
                 </div>
                 <div className={styles.movieGenres}>
-                  {data.genres
-                    ? data.genres.map(({ name }) => (
-                        <div className={styles.Genres}>
-                          <span>{name}</span>
-                        </div>
-                      ))
-                    : null}
+                  {data.genres.map(({ name }) => (
+                    <div className={styles.Genres}>
+                      <span>{name}</span>
+                    </div>
+                  ))}
                 </div>
                 <MovieActors movie_id={id} />
                 <MovieImages movie_id={id} />

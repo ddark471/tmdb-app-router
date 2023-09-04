@@ -5,16 +5,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./Genres.module.css";
 
 const Genres = ({ genre_ids }) => {
-  const [genresList, setGenresList] = useState([]);
   const { t, i18n } = useTranslation();
-
-  // useEffect(() => {
-  //   service(
-  //     `https://api.themoviedb.org/3/genre/movie/list?api_key=ad2c8cdf383ced3998f35ea391725c12&language=${i18n.language}`,
-  //     "GET"
-  //   ).then((genresData) => setGenresList(genresData.data.genres));
-  // }, [genre_ids, i18n.language]);
-
   const { data, isSuccess, isError } = useQuery({
     queryKey: ["Genres", genre_ids, i18n.language],
     queryFn: async () => {
@@ -46,11 +37,13 @@ const Genres = ({ genre_ids }) => {
     );
 
   const getGenreNames = (ids) => {
-    const genreNames = ids.map((genre_id) => {
-      const genreName = genresList.find((genre) => genre.id === genre_id);
-      return genreName ? genreName.name : null;
-    });
-    return genreNames.join(", ");
+    if (isSuccess) {
+      const genreNames = ids.map((genre_id) => {
+        const genreName = data.find((genre) => genre.id === genre_id);
+        return genreName ? genreName.name : null;
+      });
+      return genreNames.join(", ");
+    }
   };
 
   return (
