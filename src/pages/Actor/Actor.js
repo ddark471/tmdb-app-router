@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { PulseLoader } from "react-spinners";
-import { service } from "../../api/service";
+import { service } from "api/service";
 import { useTranslation } from "react-i18next";
-import Image from "../../components/Image/Image";
-import ActorImages from "../../components/ActorImages";
-import ActorCredits from "../../components/ActorCredits";
+import Image from "components/Image/Image";
+import ActorImages from "components/ActorImages";
+import ActorCredits from "components/ActorCredits";
 import styles from "./Actor.module.css";
 
 const Actor = () => {
