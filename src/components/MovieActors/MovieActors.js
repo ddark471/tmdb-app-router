@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { service } from "../../api/service";
+import { service } from "api/service";
 import { useTranslation } from "react-i18next";
 import styles from "./MovieActors.module.css";
 
