@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { base_url } from "../../api/url";
 import { service } from "../../api/service";
 import { useTranslation } from "react-i18next";
 import styles from "./MovieActors.module.css";
@@ -12,7 +11,7 @@ const MovieActors = ({ movie_id }) => {
     queryKey: ["Actors", movie_id, i18n.language],
     queryFn: async () => {
       const { data } = await service(
-        `${base_url}/movie/${movie_id}/credits?api_key=ad2c8cdf383ced3998f35ea391725c12`,
+        `/movie/${movie_id}/credits?api_key=ad2c8cdf383ced3998f35ea391725c12`,
         "GET"
       );
       return data.cast;
