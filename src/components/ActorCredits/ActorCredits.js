@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { service } from "../../api/service";
-import PostersTemplate from "../PostersTemplate/PostersTemplate";
+import { service } from "api/service";
+import PostersTemplate from "components/PostersTemplate/PostersTemplate";
 import { useTranslation } from "react-i18next";
 import styles from "./ActorCredits.module.css";
 
