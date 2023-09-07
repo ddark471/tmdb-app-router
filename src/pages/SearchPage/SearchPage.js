@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { base_url } from "../../api/url";
 import { useTranslation } from "react-i18next";
 import { PulseLoader } from "react-spinners";
 import { service } from "../../api/service";
@@ -28,9 +27,9 @@ const SearchPage = () => {
     queryKey: ["SearchPage", searchParams.get("page"), query],
     queryFn: async () => {
       const { data } = await service(
-        `${base_url}/search/movie?query=${query}&language=${t(
-          "api-code"
-        )}&page=${searchParams.get("page") ? searchParams.get("page") : 1}`,
+        `/search/movie?query=${query}&language=${t("api-code")}&page=${
+          searchParams.get("page") ? searchParams.get("page") : 1
+        }`,
         "GET"
       );
       return data.results;
