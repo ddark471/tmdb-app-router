@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { base_url } from "../../api/url";
 import { service } from "../../api/service";
 import ModalImage from "react-modal-image";
 import styles from "./MovieImages.module.css";
 
 const MovieImages = ({ movie_id }) => {
-  const url = `${base_url}/movie/${movie_id}/images`;
-
   const { data, isSuccess, isError } = useQuery({
     queryKey: ["MovieImages", movie_id],
     queryFn: async () => {
-      const { data } = await service(url, "GET");
+      const { data } = await service(`/movie/${movie_id}/images`, "GET");
       return data.backdrops;
     },
   });
