@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { service } from "../../api/service";
+import { service } from "api/service";
 import ModalImage from "react-modal-image";
 import styles from "./MovieImages.module.css";
 
