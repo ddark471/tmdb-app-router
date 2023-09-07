@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { base_url } from "../../api/url";
 import { service } from "../../api/service";
 import ModalImage from "react-modal-image";
 import styles from "./ActorImages.module.css";
@@ -9,10 +8,7 @@ const ActorImages = ({ person_id }) => {
   const { data, isError, isSuccess, error } = useQuery({
     queryKey: ["ActorImages", person_id],
     queryFn: async () => {
-      const { data } = await service(
-        `${base_url}/person/${person_id}/images`,
-        "GET"
-      );
+      const { data } = await service(`/person/${person_id}/images`, "GET");
       return data.profiles;
     },
   });
