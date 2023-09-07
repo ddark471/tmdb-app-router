@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Rating from "../Rating/Rating";
-import Image from "../Image/Image";
-import Genres from "../Genres/Genres";
+import Rating from "components/Rating/Rating";
+import Image from "components/Image/Image";
+import Genres from "components/Genres/Genres";
 import styles from "./PostersTemplate.module.css";
 
 const PostersTemplate = ({ postersData, type }) => (
