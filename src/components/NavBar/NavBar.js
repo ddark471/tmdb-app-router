@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Search from "../Search";
-import LanguageSwitcher from "../LanguageSwitcher";
+import Search from "components/Search";
+import LanguageSwitcher from "components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import styles from "./NavBar.module.css";
 
