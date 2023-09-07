@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { service } from "../../api/service";
+import { service } from "api/service";
 import { useTranslation } from "react-i18next";
-import PostersTemplate from "../PostersTemplate/PostersTemplate";
+import PostersTemplate from "components/PostersTemplate/PostersTemplate";
 import styles from "./Recommendations.module.css";
 
 const Recommendations = ({ movie_id }) => {
