@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { base_url } from "../../api/url";
 import { PulseLoader } from "react-spinners";
 import { service } from "../../api/service";
 import { useTranslation } from "react-i18next";
@@ -17,7 +16,7 @@ const Actor = () => {
     queryKey: ["ActorDetails", id, i18n.language],
     queryFn: async () => {
       const { data } = await service(
-        `${base_url}/person/${id}?language=${t("api-code")}`,
+        `/person/${id}?language=${t("api-code")}`,
         "GET"
       );
       return data;
