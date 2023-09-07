@@ -2,14 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useSearchParams, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { PulseLoader } from "react-spinners";
-import { service } from "../../api/service";
+import { service } from "api/service";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Rating from "../../components/Rating/Rating";
-import Image from "../../components/Image/Image";
-import Genres from "../../components/Genres/Genres";
-import PostersTemplate from "../../components/PostersTemplate/PostersTemplate";
-import Pagination from "../../components/Pagination/Pagination";
+import Rating from "components/Rating/Rating";
+import Image from "components/Image/Image";
+import Genres from "components/Genres/Genres";
+import PostersTemplate from "components/PostersTemplate/PostersTemplate";
+import Pagination from "components/Pagination/Pagination";
 import styles from "./Movies.module.css";
 
 const Movies = () => {
