@@ -3,11 +3,11 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { PulseLoader } from "react-spinners";
-import { service } from "../../api/service";
-import PostersTemplate from "../../components/PostersTemplate/PostersTemplate";
-import Pagination from "../../components/Pagination/Pagination";
-import NavBar from "../../components/NavBar/NavBar";
-import styles from "../Movies/Movies.module.css";
+import { service } from "api/service";
+import PostersTemplate from "components/PostersTemplate/PostersTemplate";
+import Pagination from "components/Pagination/Pagination";
+import NavBar from "components/NavBar/NavBar";
+import styles from "pages/Movies/Movies.module.css";
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
