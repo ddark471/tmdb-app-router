@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { base_url } from "../../api/url";
 import { service } from "../../api/service";
 import { useTranslation } from "react-i18next";
 import PostersTemplate from "../PostersTemplate/PostersTemplate";
@@ -13,9 +12,7 @@ const Recommendations = ({ movie_id }) => {
     queryKey: ["Recommendations", movie_id, i18n.language],
     queryFn: async () => {
       const { data } = await service(
-        `${base_url}/movie/${movie_id}/recommendations?language=${t(
-          "api-code"
-        )}`,
+        `/movie/${movie_id}/recommendations?language=${t("api-code")}`,
         "GET"
       );
       return data.results;
