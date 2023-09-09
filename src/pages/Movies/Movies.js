@@ -1,13 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useSearchParams, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { PulseLoader } from "react-spinners";
 import { service } from "api/service";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Rating from "components/Rating/Rating";
-import Image from "components/Image/Image";
-import Genres from "components/Genres/Genres";
 import PostersTemplate from "components/PostersTemplate/PostersTemplate";
 import Pagination from "components/Pagination/Pagination";
 import styles from "./Movies.module.css";
@@ -26,20 +22,16 @@ const Movies = () => {
     queryKey: ["Movies", i18n.language, searchParams.get("page")],
     queryFn: async () => {
       const { data } = await service(
-        `/movie/popular?language=${t("api-code")}&page=${
-          searchParams.get("page") ? searchParams.get("page") : 1
-        }`,
-        "GET"
+        `/movie/popular?language=${t("api-code")}&page=${searchParams.get("page") ? searchParams.get("page") : 1}`,
+        "GET",
       );
       return data;
     },
   });
 
-  const handleBackPage = () =>
-    setSearchParams({ page: parseInt(searchParams.get("page", 10)) - 1 });
+  const handleBackPage = () => setSearchParams({ page: parseInt(searchParams.get("page", 10)) - 1 });
 
-  const handleNextPage = () =>
-    setSearchParams({ page: parseInt(searchParams.get("page", 10)) + 1 });
+  const handleNextPage = () => setSearchParams({ page: parseInt(searchParams.get("page", 10)) + 1 });
 
   if (isError)
     return (
@@ -89,10 +81,7 @@ const Movies = () => {
             ))}
           </div>
           {data.total_results > data.results.length ? (
-            <Pagination
-              handleBackPage={handleBackPage}
-              handleNextPage={handleNextPage}
-            />
+            <Pagination handleBackPage={handleBackPage} handleNextPage={handleNextPage} />
           ) : null}
         </>
       )}
