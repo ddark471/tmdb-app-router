@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import { Query, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./index.css";
 import App from "./App";
@@ -16,5 +16,5 @@ root.render(
         <ReactQueryDevtools />
       </QueryClientProvider>
     </Suspense>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
