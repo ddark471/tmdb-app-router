@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styles from "./Search.module.css";
 
 const Search = ({ inputValue, setInputValue }) => {
   const { t } = useTranslation();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currPage = 1;
+  const [setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const handleChange = (event) => setInputValue(event.target.value);
@@ -29,12 +28,7 @@ const Search = ({ inputValue, setInputValue }) => {
           onChange={handleChange}
           autoComplete={"off"}
         />
-        <input
-          type="submit"
-          className={styles.searchBarButton}
-          value={`${t("searchBarButton")}`}
-          id="searchButton"
-        />
+        <input type="submit" className={styles.searchBarButton} value={`${t("searchBarButton")}`} id="searchButton" />
       </label>
     </form>
   );
