@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { PulseLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 import { isError, useQuery } from "@tanstack/react-query";
@@ -6,7 +6,6 @@ import { service } from "api/service";
 import { sliceDescription } from "utils/sliceDescription";
 import { convertToDollars } from "utils/converToDollars";
 import { convertToHours } from "utils/convertToHours";
-import NavBar from "components/NavBar/NavBar";
 import Image from "components/Image";
 import Rating from "components/Rating";
 import MovieImages from "components/MovieImages";
@@ -21,10 +20,7 @@ const Movie = () => {
   const { data, isSuccess, error, isFetched } = useQuery({
     queryKey: ["MovieDetails", id, i18n.language],
     queryFn: async () => {
-      const { data } = await service(
-        `/movie/${id}?language=${t("api-code")}`,
-        "GET"
-      );
+      const { data } = await service(`/movie/${id}?language=${t("api-code")}`, "GET");
       return data;
     },
   });
@@ -66,40 +62,30 @@ const Movie = () => {
                   <span className={styles.titleText}>{data.title}</span>
                 </div>
                 <div className={styles.movieOverview}>
-                  <span className={styles.itemContent}>
-                    {t("description")}{" "}
-                  </span>
-                  <span className={styles.itemText}>
-                    {sliceDescription(data.overview)}
-                  </span>
+                  <span className={styles.itemContent}>{t("description")} </span>
+                  <span className={styles.itemText}>{sliceDescription(data.overview)}</span>
                 </div>
                 <div className={styles.movieItem}>
-                  <span className={styles.itemContent}>
-                    {t("release_date")}:{" "}
-                  </span>
+                  <span className={styles.itemContent}>{t("release_date")}: </span>
                   <span className={styles.itemText}>{data.release_date}</span>
                 </div>
                 <div className={styles.movieItem}>
                   <span className={styles.itemContent}>{t("budget")}: </span>
-                  <span className={styles.itemText}>
-                    $ {convertToDollars(data.budget)}
-                  </span>
+                  <span className={styles.itemText}>$ {convertToDollars(data.budget)}</span>
                 </div>
                 <div className={styles.movieItem}>
                   <span className={styles.itemContent}>{t("revenue")}: </span>
-                  <span className={styles.itemText}>
-                    $ {convertToDollars(data.revenue)}
-                  </span>
+                  <span className={styles.itemText}>$ {convertToDollars(data.revenue)}</span>
                 </div>
                 <div className={styles.movieItem}>
                   <span className={styles.itemContent}>{t("duration")}: </span>
-                  <span className={styles.itemText}>{`${totalHours.hours}${t(
-                    "hours"
-                  )} ${totalHours.minutes}${t("minutes")}`}</span>
+                  <span className={styles.itemText}>{`${totalHours.hours}${t("hours")} ${totalHours.minutes}${t(
+                    "minutes",
+                  )}`}</span>
                 </div>
                 <div className={styles.movieGenres}>
-                  {data.genres.map(({ name }) => (
-                    <div className={styles.Genres}>
+                  {data.genres.map(({ id, name }) => (
+                    <div className={styles.Genres} key={id}>
                       <span>{name}</span>
                     </div>
                   ))}
