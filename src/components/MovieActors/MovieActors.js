@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { service } from "api/service";
@@ -10,10 +10,7 @@ const MovieActors = ({ movie_id }) => {
   const { data, isSuccess, isError } = useQuery({
     queryKey: ["Actors", movie_id, i18n.language],
     queryFn: async () => {
-      const { data } = await service(
-        `/movie/${movie_id}/credits?api_key=ad2c8cdf383ced3998f35ea391725c12`,
-        "GET"
-      );
+      const { data } = await service(`/movie/${movie_id}/credits?api_key=ad2c8cdf383ced3998f35ea391725c12`, "GET");
       return data.cast;
     },
   });
@@ -46,12 +43,7 @@ const MovieActors = ({ movie_id }) => {
     <>
       {isSuccess && (
         <div className={styles.showActors}>
-          <button
-            className={`${styles.moreButton} ${
-              showAll ? styles.buttonClicked : null
-            }`}
-            onClick={handleShowAll}
-          >
+          <button className={`${styles.moreButton} ${showAll ? styles.buttonClicked : null}`} onClick={handleShowAll}>
             {t("showAll")}
           </button>
           <div className={styles.actorsInline}>
