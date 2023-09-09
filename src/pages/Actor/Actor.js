@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { PulseLoader } from "react-spinners";
@@ -15,10 +15,7 @@ const Actor = () => {
   const { data, isSuccess, isError, isFetched } = useQuery({
     queryKey: ["ActorDetails", id, i18n.language],
     queryFn: async () => {
-      const { data } = await service(
-        `/person/${id}?language=${t("api-code")}`,
-        "GET"
-      );
+      const { data } = await service(`/person/${id}?language=${t("api-code")}`, "GET");
       return data;
     },
   });
@@ -80,9 +77,7 @@ const Actor = () => {
               {data.biography && (
                 <div className={styles.detiailsBiography}>
                   <span className={styles.itemPrefix}>{t("biography")}: </span>
-                  <span className={styles.biographyValue}>
-                    {data.biography}
-                  </span>
+                  <span className={styles.biographyValue}>{data.biography}</span>
                 </div>
               )}
               <ActorImages person_id={id} />
