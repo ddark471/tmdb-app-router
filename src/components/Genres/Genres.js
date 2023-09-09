@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { service } from "api/service";
 import { useTranslation } from "react-i18next";
 import styles from "./Genres.module.css";
 
 const Genres = ({ genre_ids }) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const { data, isSuccess, isError } = useQuery({
     queryKey: ["Genres", genre_ids, i18n.language],
     queryFn: async () => {
       const { data } = await service(
         `/genre/movie/list?api_key=ad2c8cdf383ced3998f35ea391725c12&language=${i18n.language}`,
-        "GET"
+        "GET",
       );
       return data.genres;
     },
@@ -50,9 +50,7 @@ const Genres = ({ genre_ids }) => {
     <>
       {isSuccess && (
         <div className={styles.genres}>
-          <span className={styles.genres__text}>
-            {getGenreNames(genre_ids)}
-          </span>
+          <span className={styles.genres__text}>{getGenreNames(genre_ids)}</span>
         </div>
       )}
     </>
