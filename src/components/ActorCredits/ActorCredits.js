@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { service } from "api/service";
 import PostersTemplate from "components/PostersTemplate/PostersTemplate";
@@ -7,13 +7,10 @@ import styles from "./ActorCredits.module.css";
 
 const ActorCredits = ({ person_id }) => {
   const { t, i18n } = useTranslation();
-  const { data, isError, error, isSuccess } = useQuery({
+  const { data, error, isSuccess } = useQuery({
     queryKey: ["ActorCredits", person_id, i18n.language],
     queryFn: async () => {
-      const { data } = await service(
-        `/person/${person_id}/movie_credits?language=${t("api-code")}`,
-        "GET"
-      );
+      const { data } = await service(`/person/${person_id}/movie_credits?language=${t("api-code")}`, "GET");
       return data.cast;
     },
   });
