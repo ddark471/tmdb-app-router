@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -6,12 +6,10 @@ import { PulseLoader } from "react-spinners";
 import { service } from "api/service";
 import PostersTemplate from "components/PostersTemplate/PostersTemplate";
 import Pagination from "components/Pagination/Pagination";
-import NavBar from "components/NavBar/NavBar";
 import styles from "pages/Movies/Movies.module.css";
 
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [totalResults, setTotalResults] = useState(0);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const query = searchParams.get("query");
@@ -23,14 +21,14 @@ const SearchPage = () => {
     });
   }, [searchParams]);
 
-  const { data, isError, isSuccess, isFetched, error } = useQuery({
+  const { data, isError, isSuccess, isFetched } = useQuery({
     queryKey: ["SearchPage", searchParams.get("page"), query],
     queryFn: async () => {
       const { data } = await service(
         `/search/movie?query=${query}&language=${t("api-code")}&page=${
           searchParams.get("page") ? searchParams.get("page") : 1
         }`,
-        "GET"
+        "GET",
       );
       return data.results;
     },
@@ -99,18 +97,10 @@ const SearchPage = () => {
           <>
             <div className={styles.moviesContainer}>
               {data.map((movies) => (
-                <PostersTemplate
-                  postersData={movies}
-                  type={"moviePosters"}
-                  key={movies.id}
-                />
+                <PostersTemplate postersData={movies} type={"moviePosters"} key={movies.id} />
               ))}
             </div>
-            <Pagination
-              handleBackPage={handleBackPage}
-              handleNextPage={handleNextPage}
-              searchResults={data}
-            />
+            <Pagination handleBackPage={handleBackPage} handleNextPage={handleNextPage} searchResults={data} />
           </>
         ) : (
           <div
@@ -126,9 +116,7 @@ const SearchPage = () => {
               justifyContent: "center",
             }}
           >
-            <h1 style={{ fontSize: "50px", fontStyle: "bold" }}>
-              404 not found
-            </h1>
+            <h1 style={{ fontSize: "50px", fontStyle: "bold" }}>404 not found</h1>
           </div>
         ))}
     </>
