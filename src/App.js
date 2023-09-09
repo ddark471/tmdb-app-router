@@ -8,7 +8,6 @@ import SearchPage from "./pages/SearchPage";
 import styles from "./App.module.css";
 
 const App = () => {
-  let page = 1;
   return (
     <BrowserRouter>
       <div className={styles.wrap}>
