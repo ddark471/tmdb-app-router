@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { service } from "api/service";
 import { useTranslation } from "react-i18next";
@@ -8,13 +8,10 @@ import styles from "./Recommendations.module.css";
 const Recommendations = ({ movie_id }) => {
   const { t, i18n } = useTranslation();
 
-  const { data, isSuccess, isFetched, isError } = useQuery({
+  const { data, isSuccess, isError } = useQuery({
     queryKey: ["Recommendations", movie_id, i18n.language],
     queryFn: async () => {
-      const { data } = await service(
-        `/movie/${movie_id}/recommendations?language=${t("api-code")}`,
-        "GET"
-      );
+      const { data } = await service(`/movie/${movie_id}/recommendations?language=${t("api-code")}`, "GET");
       return data.results;
     },
   });
