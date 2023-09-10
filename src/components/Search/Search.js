@@ -5,7 +5,7 @@ import styles from "./Search.module.css";
 
 const Search = ({ inputValue, setInputValue }) => {
   const { t } = useTranslation();
-  const [setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const handleChange = (event) => setInputValue(event.target.value);
@@ -13,7 +13,7 @@ const Search = ({ inputValue, setInputValue }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setSearchParams({ query: inputValue ? inputValue : "/" });
-    navigate(`/search?query=${inputValue}`, { replace: true });
+    navigate(`/search?query=${inputValue.toString()}`, { replace: true });
   };
 
   return (
